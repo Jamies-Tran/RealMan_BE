@@ -1,8 +1,6 @@
 package com.capstone.realmen.repository.database.account;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 import com.capstone.realmen.dto.enums.EAccountStatus;
 import com.capstone.realmen.dto.enums.EGender;
 import com.capstone.realmen.dto.enums.ERole;
@@ -57,9 +55,4 @@ public class AccountEntity extends AuditableEntity {
     EGender gender;
     @Column(name = "accountStatus")
     EAccountStatus accountStatus = EAccountStatus.ACTIVATED;
-    @Column(name = "pass_expired_at")
-    @Temporal(TemporalType.TIMESTAMP)
-    LocalDateTime passExpiredAt;
-    @Column(name = "is_pass_available")
-    Boolean isPassAvailable;
 }

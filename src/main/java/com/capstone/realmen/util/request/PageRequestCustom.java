@@ -9,8 +9,8 @@ public record PageRequestCustom(PageRequest pageRequest) {
         return new PageRequestCustom(pageRequest);
     }
 
-    public static PageRequestCustom of(Integer current, Integer pageSize, String sorter) {
-        PageRequest pageRequest = PageRequest.of(current - 1, pageSize, Sort.by(sorter));
+    public static PageRequestCustom of(Integer current, Integer pageSize, Sort sortBy) {
+        PageRequest pageRequest = PageRequest.of(current - 1, pageSize, sortBy);
         return new PageRequestCustom(pageRequest);
     }
 

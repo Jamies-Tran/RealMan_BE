@@ -2,6 +2,8 @@ package com.capstone.realmen.dto.auditable;
 
 import java.time.LocalDateTime;
 
+import com.capstone.realmen.repository.database.auditable.AuditableEntity;
+
 import lombok.Builder;
 
 @Builder
@@ -28,12 +30,21 @@ public record Auditable(
                 .build();
     }
 
-    public static Auditable of() {
+    public static Auditable ofNoIdentifier() {
         return Auditable.builder()
                 .createdBy("-")
                 .createdAt(LocalDateTime.now())
                 .updatedBy("-")
                 .updatedAt(LocalDateTime.now())
+                .build();
+    }
+
+    public static Auditable updateEntity(AuditableEntity entity, String identifier) {
+        return Auditable.builder()
+                .createdAt(entity.getCreatedAt())
+                .createdBy(entity.getCreatedBy())
+                .updatedAt(LocalDateTime.now())
+                .updatedBy(identifier)
                 .build();
     }
 }

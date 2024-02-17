@@ -1,5 +1,7 @@
 package com.capstone.realmen.controller.web.account;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -7,11 +9,14 @@ import com.capstone.realmen.controller.web.account.models.AccountRequest;
 import com.capstone.realmen.controller.web.account.models.AccountRequestModelMapper;
 import com.capstone.realmen.controller.web.account.models.AccountResponse;
 import com.capstone.realmen.controller.web.account.models.AccountResponseModelMapper;
+import com.capstone.realmen.controller.web.account.models.ChangePasswordRequest;
+import com.capstone.realmen.controller.web.account.models.UpdateAccountRequest;
 import com.capstone.realmen.dto.account.Account;
 import com.capstone.realmen.dto.account.AccountSearchCriteria;
 import com.capstone.realmen.dto.enums.EAccountStatus;
-import com.capstone.realmen.dto.enums.EParticipantSide;
+import com.capstone.realmen.dto.enums.ERole;
 import com.capstone.realmen.service.account.AccountUseCaseService;
+import com.capstone.realmen.util.request.CustomeSorter;
 import com.capstone.realmen.util.request.PageRequestCustom;
 import com.capstone.realmen.util.response.PageResponse;
 import com.capstone.realmen.util.response.ValueResponse;
@@ -44,14 +49,16 @@ public class AccountsController implements AccountsAPI {
     }
 
     @Override
-    public PageResponse<AccountResponse> pageAll(String search, Long branchId, EAccountStatus status, String sorter,
+    public PageResponse<AccountResponse> pageAll(String search, Long branchId, EAccountStatus status, List<ERole> roles,
+            String sorter,
             @Min(1) Integer current, Integer pageSize) {
-        PageRequestCustom pageRequestCustom = PageRequestCustom.of(current, pageSize, sorter);
+        CustomeSorter customerSorter = CustomeSorter.of(sorter);
+        PageRequestCustom pageRequestCustom = PageRequestCustom.of(current, pageSize, customerSorter.sortBy());
         AccountSearchCriteria searchCriteria = AccountSearchCriteria.builder()
                 .search(search)
                 .branchId(branchId)
                 .status(status)
-                .participantSide(EParticipantSide.BARBER)
+                .roles(roles)
                 .build();
         Page<AccountResponse> accounts = accountUseCaseService.pageAll(searchCriteria, pageRequestCustom)
                 .map(accountResponseModelMapper::toModel);
@@ -61,5 +68,20 @@ public class AccountsController implements AccountsAPI {
                 accounts.getTotalPages(),
                 pageRequestCustom.current(),
                 accounts.getPageable().getPageSize());
+    }
+
+    @Override
+    public void createOTPChangePassword(String phone) {
+        accountUseCaseService.createOTPChangePassword(phone);
+    }
+
+    @Override
+    public void changePassword(@Valid ChangePasswordRequest changePasswordRequest) {
+        accountUseCaseService.changePassword(changePasswordRequest);
+    }
+
+    @Override
+    public void updateMe(UpdateAccountRequest updateAccountRequest) {
+        accountUseCaseService.updateMe(accountRequestModelMapper.toDto(updateAccountRequest));
     }
 }

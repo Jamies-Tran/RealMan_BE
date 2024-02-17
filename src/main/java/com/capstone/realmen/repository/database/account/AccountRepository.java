@@ -7,8 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.capstone.realmen.dto.account.AccountSearchCriteria;
-import com.capstone.realmen.dto.enums.EParticipantSide;
-import com.capstone.realmen.dto.enums.ERole;
+import com.capstone.realmen.info.account.AccountInfo;
 
 import java.util.Optional;
 
@@ -32,18 +31,48 @@ public interface AccountRepository extends JpaRepository<AccountEntity, Long> {
     Boolean existsByPassword(String password);
 
     @Query("""
-            SELECT a
+            SELECT
+                a.accountId AS accountId,
+                a.branchId AS branchId,
+                a.firstName AS firstName,
+                a.lastName AS lastName,
+                a.phone AS phone,
+                a.password AS password,
+                a.staffCode AS staffCode,
+                a.role AS role,
+                a.thumbnail AS thumbnail,
+                a.dob AS dob,
+                a.gender AS gender,
+                a.accountStatus AS accountStatus
+            FROM AccountEntity a
+            WHERE a.accountId = :accountId
+            """)
+    Optional<AccountInfo> findByAccountId(Long accountId);
+
+    @Query("""
+            SELECT
+                a.accountId AS accountId,
+                a.branchId AS branchId,
+                a.firstName AS firstName,
+                a.lastName AS lastName,
+                a.phone AS phone,
+                a.password AS password,
+                a.staffCode AS staffCode,
+                a.role AS role,
+                a.thumbnail AS thumbnail,
+                a.dob AS dob,
+                a.gender AS gender,
+                a.accountStatus AS accountStatus
             FROM AccountEntity a
             WHERE (:#{#searchCriteria.hasSearchEmpty()} = TRUE
-                    OR (LOWER(CONCAT(a.firstName, a.lastName)) LIKE %:#{#searchCriteria.search()}%
-                    OR a.phone LIKE %:#{#searchCriteria.search()}%
-                    OR LOWER(a.staffCode) LIKE %:#{#searchCriteria.search()}%))
-                AND (:#{#searchCriteria.hasBranchIdEmpty()} = TRUE OR a.branchId = :#{#searchCriteria.branchId()})
-                AND (:#{#searcCriteria.hasParticipantSideEmpty()} = TRUE
-                    OR CASE
-                        WHEN :#{#searchCriteria.participantSide()} = com.capstone.realmen.dto.enums.EParticipantSide.BARBER THEN a.role IN (SHOPOWNER, STYLIST)
-                        ELSE a.role = CUSTOMER
-                    END)
+                    OR LOWER(CONCAT(a.firstName, ' ' , a.lastName)) LIKE %:#{#searchCriteria.search}%
+                    OR a.phone LIKE %:#{#searchCriteria.search}%
+                    OR a.staffCode LIKE %:#{#searchCriteria.search}%)
+                AND (:#{#searchCriteria.hasBranchIdEmpty()} = TRUE
+                    OR a.branchId = :#{#searchCriteria.branchId})
+                AND (:#{#searchCriteria.hasStatusEmpty()} = TRUE
+                    OR a.accountStatus = :#{#searchCriteria.status})
+                AND a.role IN :#{#searchCriteria.roles}
             """)
-    Page<AccountEntity> pageAll(AccountSearchCriteria searchCriteria, Pageable pageable);
+    Page<AccountInfo> pageAll(AccountSearchCriteria searchCriteria, Pageable pageable);
 }

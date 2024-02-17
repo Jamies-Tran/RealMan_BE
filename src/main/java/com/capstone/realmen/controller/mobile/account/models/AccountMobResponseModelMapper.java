@@ -4,9 +4,9 @@ import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
 import com.capstone.realmen.dto.account.Account;
-import com.capstone.realmen.util.mappers.RequestModelMapper;
+import com.capstone.realmen.util.mappers.ResponseModelMapper;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface AccountMobRequestModelMapper extends RequestModelMapper<AccountMobRequest, Account> {
-    Account toDto(UpdateAccountMobRequest update);
+public interface AccountMobResponseModelMapper extends ResponseModelMapper<AccountMobResponse, Account> {
+
 }

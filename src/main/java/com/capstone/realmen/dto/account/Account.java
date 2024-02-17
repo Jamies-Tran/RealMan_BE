@@ -6,7 +6,6 @@ import com.capstone.realmen.dto.enums.ERole;
 
 import lombok.Builder;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Builder
@@ -22,8 +21,6 @@ public record Account(
                 String thumbnail,
                 LocalDate dob,
                 EGender gender,
-                LocalDateTime passExpiredAt,
-                Boolean isPassAvailable,
                 EAccountStatus accountStatus) {
         public EAccountStatus accountStatus() {
                 return Objects.nonNull(accountStatus) ? accountStatus : EAccountStatus.ACTIVATED;

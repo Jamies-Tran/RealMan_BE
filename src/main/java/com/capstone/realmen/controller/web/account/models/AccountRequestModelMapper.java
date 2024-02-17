@@ -8,5 +8,6 @@ import com.capstone.realmen.util.mappers.RequestModelMapper;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface AccountRequestModelMapper extends RequestModelMapper<AccountRequest, Account> {
-
+    
+    Account toDto(UpdateAccountRequest update);
 }

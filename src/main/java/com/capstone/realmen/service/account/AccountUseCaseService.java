@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.capstone.realmen.controller.web.account.models.ChangePasswordRequest;
 import com.capstone.realmen.dto.account.Account;
 import com.capstone.realmen.dto.account.AccountSearchCriteria;
 import com.capstone.realmen.util.request.PageRequestCustom;
@@ -35,8 +36,23 @@ public class AccountUseCaseService {
     }
 
     @Transactional
-    public void disablePassword(Long accountId) {
-        accountCommandService.disablePassword(accountId);
+    public void createOTPChangePassword(String phone) {
+        accountCommandService.createOTPChangePassword(phone);
+    }
+
+    @Transactional
+    public void changePassword(ChangePasswordRequest changePasswordRequest) {
+        accountCommandService.changePassword(changePasswordRequest);
+    }
+
+    @Transactional
+    public void updateMe(Account account) {
+        accountCommandService.updateMe(account);
+    }
+
+    @Transactional
+    public void deleteAccount(Long accountId) {
+        accountCommandService.deleteAccount(accountId);
     }
 
     public Account findByPhoneOrStaffCode(String phoneOrStaffCode) {

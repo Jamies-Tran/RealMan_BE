@@ -1,10 +1,14 @@
 package com.capstone.realmen.dto.account;
 
+import java.time.LocalDateTime;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.ReportingPolicy;
 
+import com.capstone.realmen.dto.auditable.Auditable;
+import com.capstone.realmen.dto.enums.EAccountStatus;
 import com.capstone.realmen.dto.enums.ERole;
 import com.capstone.realmen.repository.database.account.AccountEntity;
 import com.capstone.realmen.util.mappers.DTOMapper;
@@ -15,4 +19,19 @@ public interface AccountMapper extends DTOMapper<Account, AccountEntity> {
     Account updatePassword(Account dto, String password);
 
     void updateBeforeSave(@MappingTarget AccountEntity entity, String password, ERole role);
+
+    void changePassword(@MappingTarget AccountEntity entity, String password, Auditable auditable);
+
+    void updateAuditable(@MappingTarget AccountEntity entity, LocalDateTime updatedAt, String updatedBy);
+
+    @Mapping(target = "accountId", ignore = true)
+    @Mapping(target = "branchId", ignore = true)
+    @Mapping(target = "staffCode", ignore = true)
+    @Mapping(target = "password", ignore = true)
+    @Mapping(target = "accountStatus", ignore = true)
+    @Mapping(target = "role", ignore = true)
+    void update(@MappingTarget AccountEntity entity, Account dto, Auditable auditable);
+
+    @Mapping(target = "accountStatus", source = "accountStatus")
+    void updateStatus(@MappingTarget AccountEntity entity, EAccountStatus accountStatus, Auditable auditable);
 }

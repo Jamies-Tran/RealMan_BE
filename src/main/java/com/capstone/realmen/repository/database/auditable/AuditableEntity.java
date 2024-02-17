@@ -13,7 +13,7 @@ import lombok.experimental.FieldDefaults;
 @MappedSuperclass
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class AuditableEntity {
+public abstract class AuditableEntity {
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
     LocalDateTime createdAt;

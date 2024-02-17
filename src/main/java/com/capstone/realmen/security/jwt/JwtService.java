@@ -26,9 +26,17 @@ public class JwtService {
     private Date now = new Date();
 
     public String generateJwtToken(String identify) {
-        Instant expiredFromTime = Instant.now().plus(expiredTime, ChronoUnit.HOURS);
+
         return Jwts.builder().signWith(Keys.hmacShaKeyFor(secretKey.getBytes())).setSubject(identify)
-                .setExpiration(Date.from(expiredFromTime)).setIssuedAt(now).compact();
+                .setExpiration(Date.from(expiredTime())).setIssuedAt(now).compact();
+    }
+
+    private Instant expiredTime() {
+        return Instant.now().plus(expiredTime, ChronoUnit.HOURS);
+    }
+
+    public Long getJwtDuration() {
+        return ChronoUnit.MINUTES.between(Instant.now(), expiredTime());
     }
 
     public String getIdentify(String jwt) {

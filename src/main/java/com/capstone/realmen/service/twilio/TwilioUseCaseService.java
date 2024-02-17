@@ -20,11 +20,22 @@ public class TwilioUseCaseService {
                 .create();
     }
 
+    public void sendChangePassOTP(String phone, String otp) {
+        initTwilio();
+        phone = "+84".concat(phone.substring(1));
+        Message.creator(new PhoneNumber(phone), new PhoneNumber(TwilioProperties.TWILIO_PHONE_NUMBER),
+                sendOTPChangePassMsg(otp)).create();
+    }
+
     private void initTwilio() {
         Twilio.init(TwilioProperties.ACCOUNT_SID, TwilioProperties.AUTH_TOKEN);
     }
 
     private String sendOTPMsg(String otp) {
         return String.format("Mật khẩu đăng nhập của bạn là %s", otp);
+    }
+
+    private String sendOTPChangePassMsg(String otp) {
+        return String.format("OTP đổi mật khẩu của quý khách là: %s", otp);
     }
 }

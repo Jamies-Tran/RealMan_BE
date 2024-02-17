@@ -11,6 +11,7 @@ import com.capstone.realmen.controller.error.exceptions.AccountLoginException;
 import com.capstone.realmen.controller.error.exceptions.JwtInvalidException;
 import com.capstone.realmen.controller.error.exceptions.ResourceDuplicatedException;
 import com.capstone.realmen.controller.error.exceptions.ResourceNotFoundException;
+import com.capstone.realmen.controller.error.exceptions.WrongOTPException;
 import com.capstone.realmen.controller.error.models.ErrorResponse;
 import com.capstone.realmen.dto.error.AppError;
 
@@ -90,6 +91,17 @@ public class ErrorHandler {
                 .errorCode(AppError.ACCOUNT_DUPLICATED.getCode())
                 .errorMsg(AppError.ACCOUNT_DUPLICATED.getMessage())
                 .statusCode(HttpStatus.CONFLICT.value())
+                .issueAt(LocalDateTime.now())
+                .build();
+    }
+
+    @ResponseStatus(code = HttpStatus.PRECONDITION_FAILED)
+    @ExceptionHandler(WrongOTPException.class)
+    public ErrorResponse WrongPaseHandler(WrongOTPException exc) {
+        return ErrorResponse.builder()
+                .errorCode(AppError.WRONG_OTP_CHANGE_PASS.getCode())
+                .errorMsg(AppError.WRONG_OTP_CHANGE_PASS.getMessage())
+                .statusCode(HttpStatus.PRECONDITION_FAILED.value())
                 .issueAt(LocalDateTime.now())
                 .build();
     }

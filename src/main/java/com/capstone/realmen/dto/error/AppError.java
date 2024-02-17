@@ -9,11 +9,12 @@ import lombok.experimental.FieldDefaults;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public enum AppError {
-    NOT_FOUND("RM_404", "NOT_FOUND"),
-    JWT_INVALID("RM_401", "INVALID_LOGIN"),
-    INVALID_REQUEST("RM_400", "INVALID_REQUEST"),
-    ACCOUNT_INVALID("RM_401_2", "INF_NOT_VALID"),
-    ACCOUNT_DUPLICATED("RM_409", "ACCOUNT_DUPLICATED");
+    NOT_FOUND("RM001", "Thông tin cần tìm kiếm không tồn tại"),
+    JWT_INVALID("RM002", "Thông tin đăng nhập không hợp lệ"),
+    INVALID_REQUEST("RM003", "Yêu cầu không hợp lệ"),
+    ACCOUNT_INVALID("RM004", "Thông tin tài khoản không hợp lệ"),
+    ACCOUNT_DUPLICATED("RM005", "Tài khoản đã tồn tại trên hệ thống"),
+    WRONG_OTP_CHANGE_PASS("RM006", "OTP không đúng");
 
     final String code;
     final String message;

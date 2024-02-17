@@ -11,7 +11,7 @@ import com.capstone.realmen.util.response.ValueResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
-@Tag(name = "Authentication", description = "Authentication API")
+@Tag(name = "MOB-Authentication", description = "Authentication API")
 @RequestMapping("/web/auth")
 public interface AuthAPI {
     @PostMapping
