@@ -5,7 +5,6 @@ import com.capstone.realmen.dto.enums.EAccountStatus;
 import com.capstone.realmen.dto.enums.EGender;
 import com.capstone.realmen.dto.enums.ERole;
 import com.capstone.realmen.repository.database.auditable.AuditableEntity;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -53,6 +52,6 @@ public class AccountEntity extends AuditableEntity {
     LocalDate dob;
     @Column(name = "gender")
     EGender gender;
-    @Column(name = "accountStatus")
+    @Column(name = "account_status")
     EAccountStatus accountStatus = EAccountStatus.ACTIVATED;
 }
