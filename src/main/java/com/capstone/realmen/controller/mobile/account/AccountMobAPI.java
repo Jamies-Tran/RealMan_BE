@@ -10,7 +10,7 @@ import com.capstone.realmen.util.response.ValueResponse;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "MOB-Accounts", description = "Account management")
+@Tag(name = "MOB - Accounts", description = "Account management")
 @RequestMapping("/mobile/accounts/{accountId}")
 public interface AccountMobAPI {
     @GetMapping("/details")

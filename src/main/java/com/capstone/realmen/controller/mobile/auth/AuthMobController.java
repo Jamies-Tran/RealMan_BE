@@ -3,6 +3,7 @@ package com.capstone.realmen.controller.mobile.auth;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capstone.realmen.controller.mobile.auth.models.LoginMobRequest;
+import com.capstone.realmen.controller.mobile.auth.models.LoginMobRequestV2;
 import com.capstone.realmen.controller.mobile.auth.models.LoginMobResponse;
 import com.capstone.realmen.service.account.AccountUseCaseService;
 import com.capstone.realmen.service.auth.AuthUseCaseService;
@@ -26,8 +27,14 @@ public class AuthMobController implements AuthMobAPI {
     }
 
     @Override
-    public ValueResponse<LoginMobResponse> login(@Valid LoginMobRequest loginMobRequest) {
+    public ValueResponse<LoginMobResponse> customerLogin(@Valid LoginMobRequest loginMobRequest) {
         LoginMobResponse response = authUseCaseService.loginMobile(loginMobRequest);
         return new ValueResponse<LoginMobResponse>(response);
+    }
+
+    @Override
+    public ValueResponse<LoginMobResponse> staffLogin(@Valid LoginMobRequestV2 loginMobRequest) {
+        LoginMobResponse response = authUseCaseService.loginMobileV2(loginMobRequest);
+        return new ValueResponse<>(response);
     }
 }

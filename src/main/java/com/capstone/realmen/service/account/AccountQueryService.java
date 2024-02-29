@@ -46,13 +46,13 @@ public class AccountQueryService {
     }
 
     public Account findByAccountId(Long accountId) {
-        AccountInfo foundAccount = accountRepository.findByAccountId(accountId)
+        AccountInfo foundAccount = accountRepository.findInfoById(accountId)
                 .orElseThrow(ResourceNotFoundException::new);
         return accountInfoMapper.toDto(foundAccount);
     }
 
     public Account me() {
-        AccountInfo foundAccount = accountRepository.findByAccountId(requestContext.getAccountId())
+        AccountInfo foundAccount = accountRepository.findInfoById(requestContext.getAccountId())
                 .orElseThrow(ResourceNotFoundException::new);
         return accountInfoMapper.toDto(foundAccount);
     }

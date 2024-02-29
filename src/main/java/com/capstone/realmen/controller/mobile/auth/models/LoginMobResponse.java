@@ -1,16 +1,17 @@
 package com.capstone.realmen.controller.mobile.auth.models;
 
-import java.time.LocalDateTime;
-
 import lombok.Builder;
+import com.capstone.realmen.dto.enums.ERole;
 
 @Builder
 public record LoginMobResponse(
-        String accessToken,
-        Long accountId,
-        String phone,
-        String firstName,
-        String lastName,
-        LocalDateTime passExpiredAt,
-        Boolean isAccountActive) {
+                String accessToken,
+                Long accountId,
+                Long branchId,
+                String staffCode,
+                String phone,
+                String firstName,
+                String lastName,
+                Boolean isAccountActive,
+                ERole role) {
 }

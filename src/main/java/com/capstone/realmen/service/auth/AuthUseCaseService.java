@@ -1,10 +1,13 @@
 package com.capstone.realmen.service.auth;
 
+import java.util.Objects;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.capstone.realmen.controller.error.exceptions.AccountLoginException;
 import com.capstone.realmen.controller.mobile.auth.models.LoginMobRequest;
+import com.capstone.realmen.controller.mobile.auth.models.LoginMobRequestV2;
 import com.capstone.realmen.controller.mobile.auth.models.LoginMobResponse;
 import com.capstone.realmen.controller.web.auth.models.LoginRequest;
 import com.capstone.realmen.controller.web.auth.models.LoginResponse;
@@ -56,10 +59,12 @@ public class AuthUseCaseService {
             return LoginMobResponse.builder()
                     .accessToken(jwtService.generateJwtToken(loginMobRequest.phone()))
                     .accountId(foundAccount.accountId())
+                    .branchId(Objects.nonNull(foundAccount.branchId()) ? foundAccount.branchId() : null)
                     .phone(foundAccount.phone())
                     .firstName(foundAccount.firstName())
                     .lastName(foundAccount.lastName())
                     .isAccountActive(foundAccount.accountStatus().equals(EAccountStatus.ACTIVATED))
+                    .role(foundAccount.role())
                     .build();
         }
         if (!appPasswordEncoder.passwordEncoder().matches(loginMobRequest.otp(), foundAccount.password()) ||
@@ -70,10 +75,28 @@ public class AuthUseCaseService {
         return LoginMobResponse.builder()
                 .accessToken(jwtService.generateJwtToken(loginMobRequest.phone()))
                 .accountId(foundAccount.accountId())
+                .branchId(Objects.nonNull(foundAccount.branchId()) ? foundAccount.branchId() : null)
                 .phone(foundAccount.phone())
                 .firstName(foundAccount.firstName())
                 .lastName(foundAccount.lastName())
                 .isAccountActive(foundAccount.accountStatus().equals(EAccountStatus.ACTIVATED))
+                .role(foundAccount.role())
+                .build();
+    }
+
+    public LoginMobResponse loginMobileV2(LoginMobRequestV2 loginRequest) {
+        Account foundAccount = accountUseCaseService.findByStaffCode(loginRequest.staffCode());
+        if (!appPasswordEncoder.passwordEncoder().matches(loginRequest.password(), foundAccount.password())) {
+            throw new AccountLoginException();
+        }
+        return LoginMobResponse.builder()
+                .accountId(foundAccount.accountId())
+                .branchId(Objects.nonNull(foundAccount.branchId()) ? foundAccount.branchId() : null)
+                .staffCode(Objects.requireNonNullElse(foundAccount.staffCode(), "-"))
+                .firstName(foundAccount.firstName())
+                .lastName(foundAccount.lastName())
+                .accessToken(jwtService.generateJwtToken(foundAccount.staffCode()))
+                .role(foundAccount.role())
                 .build();
     }
 }

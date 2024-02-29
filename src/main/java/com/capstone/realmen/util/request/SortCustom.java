@@ -6,8 +6,8 @@ import org.springframework.data.domain.Sort.Order;
 import lombok.Builder;
 
 @Builder
-public record CustomeSorter(Sort sortBy) {
-    public static CustomeSorter of(String sorter) {
+public record SortCustom(Sort sortBy) {
+    public static Sort of(String sorter) {
         Sort sortBy = Sort.by(Order.desc("updatedAt"));
         String[] sorters = sorter.split("_");
         if (sorters.length == 2) {
@@ -17,6 +17,6 @@ public record CustomeSorter(Sort sortBy) {
                 sortBy = Sort.by(Order.desc(sorters[0]));
             }
         } 
-        return CustomeSorter.builder().sortBy(sortBy).build();
+        return sortBy;
     }
 }

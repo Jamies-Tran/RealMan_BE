@@ -72,7 +72,7 @@ public class AppSecurity {
                                 AntPathRequestMatcher.antMatcher("/web/accounts/otp/change-password"),
                                 AntPathRequestMatcher.antMatcher("/web/accounts/change-password"),
                                 AntPathRequestMatcher.antMatcher("/mobile/accounts"),
-                                AntPathRequestMatcher.antMatcher("/mobile/auth"),
+                                AntPathRequestMatcher.antMatcher("/mobile/auth/**"),
                                 AntPathRequestMatcher.antMatcher("/mobile/auth/create-otp")).permitAll())
 
                 .authorizeHttpRequests(t -> t.anyRequest().authenticated())

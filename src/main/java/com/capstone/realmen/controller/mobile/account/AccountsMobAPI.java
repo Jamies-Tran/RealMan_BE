@@ -18,7 +18,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 
-@Tag(name = "MOB-Accounts", description = "Account management")
+@Tag(name = "MOB - Accounts", description = "Account management")
 @RequestMapping("/mobile/accounts")
 public interface AccountsMobAPI {
     @PostMapping

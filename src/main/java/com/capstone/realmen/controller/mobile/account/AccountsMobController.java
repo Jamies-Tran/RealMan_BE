@@ -15,7 +15,7 @@ import com.capstone.realmen.dto.account.AccountSearchCriteria;
 import com.capstone.realmen.dto.enums.EAccountStatus;
 import com.capstone.realmen.dto.enums.ERole;
 import com.capstone.realmen.service.account.AccountUseCaseService;
-import com.capstone.realmen.util.request.CustomeSorter;
+import com.capstone.realmen.util.request.SortCustom;
 import com.capstone.realmen.util.request.PageRequestCustom;
 import com.capstone.realmen.util.response.PageResponse;
 import com.capstone.realmen.util.response.ValueResponse;
@@ -44,8 +44,7 @@ public class AccountsMobController implements AccountsMobAPI {
     @Override
     public PageResponse<AccountMobResponse> pageAll(String search, Long branchId, String sorter, @Min(1) Integer current,
             Integer pageSize) {
-        CustomeSorter customeSorter = CustomeSorter.of(sorter);
-        PageRequestCustom pageRequestCustom = PageRequestCustom.of(current, pageSize, customeSorter.sortBy());
+        PageRequestCustom pageRequestCustom = PageRequestCustom.of(current, pageSize, SortCustom.of(sorter));
         AccountSearchCriteria searchCriteria = AccountSearchCriteria.builder()
                 .search(search)
                 .branchId(branchId)

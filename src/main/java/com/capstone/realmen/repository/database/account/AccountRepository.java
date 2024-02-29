@@ -47,7 +47,7 @@ public interface AccountRepository extends JpaRepository<AccountEntity, Long> {
             FROM AccountEntity a
             WHERE a.accountId = :accountId
             """)
-    Optional<AccountInfo> findByAccountId(Long accountId);
+    Optional<AccountInfo> findInfoById(Long accountId);
 
     @Query("""
             SELECT
