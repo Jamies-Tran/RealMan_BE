@@ -22,7 +22,8 @@ public interface BarberServiceRepository extends JpaRepository<BarberServiceEnti
                 bs.serviceCategoryId AS serviceCategoryId,
                 sc.serviceCategoryName AS serviceCategoryName,
                 bs.barberServiceName AS barberServiceName,
-                bs.barberServicePrice AS barberServicePrice
+                bs.barberServicePrice AS barberServicePrice,
+                bs.thumbnail AS thumbnail
             FROM BarberServiceEntity bs
             INNER JOIN ServiceCategoryEntity sc ON bs.serviceCategoryId = sc.serviceCategoryId
             WHERE bs.serviceCategoryId = :serviceCategoryId
@@ -40,7 +41,8 @@ public interface BarberServiceRepository extends JpaRepository<BarberServiceEnti
                 bs.serviceCategoryId AS serviceCategoryId,
                 sc.serviceCategoryName AS serviceCategoryName,
                 bs.barberServiceName AS barberServiceName,
-                bs.barberServicePrice AS barberServicePrice
+                bs.barberServicePrice AS barberServicePrice,
+                bs.thumbnail AS thumbnail
             FROM BarberServiceEntity bs
             INNER JOIN ServiceCategoryEntity sc ON bs.serviceCategoryId = sc.serviceCategoryId
             WHERE bs.barberServiceId = :barberServiceId

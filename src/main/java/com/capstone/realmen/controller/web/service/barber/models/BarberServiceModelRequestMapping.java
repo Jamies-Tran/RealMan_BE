@@ -8,5 +8,4 @@ import com.capstone.realmen.util.mappers.RequestModelMapper;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface BarberServiceModelRequestMapping extends RequestModelMapper<BarberServiceRequest, BarberService> {
-
 }

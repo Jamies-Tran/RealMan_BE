@@ -1,6 +1,9 @@
 package com.capstone.realmen.dto.service.barber;
 
 import lombok.Builder;
+import java.util.List;
+
+import com.capstone.realmen.dto.service.barber.display.BarberServiceDisplay;
 
 @Builder
 public record BarberService(
@@ -8,5 +11,7 @@ public record BarberService(
         Long serviceCategoryId,
         String serviceCategoryName,
         String barberServiceName,
+        String thumbnail,
+        List<BarberServiceDisplay> barberServiceDisplays,
         Long barberServicePrice) {
 }

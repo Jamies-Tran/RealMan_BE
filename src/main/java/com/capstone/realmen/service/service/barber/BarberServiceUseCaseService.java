@@ -24,6 +24,16 @@ public class BarberServiceUseCaseService {
         barberServiceCommandService.save(barberService);
     }
 
+    @Transactional
+    public void update(Long barberServiceId, BarberService barberService) {
+        barberServiceCommandService.update(barberServiceId, barberService);
+    }
+
+    @Transactional
+    public void delete(Long barberServiceId) {
+        barberServiceCommandService.delete(barberServiceId);
+    }
+
     public Page<BarberService> pageByServiceCategoryId(Long serviceCategoryId,
             BarberServiceSearchCriteria searchCriteria, PageRequestCustom pageRequestCustom) {
         return barberServiceQueryService.pageByServiceCategoryId(serviceCategoryId, searchCriteria, pageRequestCustom);

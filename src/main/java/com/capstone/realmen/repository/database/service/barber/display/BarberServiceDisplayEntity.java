@@ -1,4 +1,4 @@
-package com.capstone.realmen.repository.database.service.barber;
+package com.capstone.realmen.repository.database.service.barber.display;
 
 import com.capstone.realmen.repository.database.auditable.AuditableEntity;
 
@@ -20,18 +20,14 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "barber_service")
+@Table(name = "barber_service_display")
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class BarberServiceEntity extends AuditableEntity {
+public class BarberServiceDisplayEntity extends AuditableEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long barberServiceDisplayId;
+    @Column(name = "barber_service_id", nullable = false)
     Long barberServiceId;
-    @Column(name = "service_category_id")
-    Long serviceCategoryId;
-    @Column(name = "barber_service_name", nullable = false)
-    String barberServiceName;
-    @Column(name = "barber_service_price", nullable = false)
-    Long barberServicePrice;
-    @Column(name = "thumbnail", nullable = false)
-    String thumbnail;
+    @Column(name = "barber_service_display_content", nullable = false)
+    String barberServiceDisplayContent;
 }

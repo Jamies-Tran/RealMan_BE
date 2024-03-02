@@ -1,7 +1,5 @@
 package com.capstone.realmen.dto.account;
 
-import java.time.LocalDateTime;
-
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -21,8 +19,6 @@ public interface AccountMapper extends DTOMapper<Account, AccountEntity> {
     void updateBeforeSave(@MappingTarget AccountEntity entity, String password, ERole role);
 
     void changePassword(@MappingTarget AccountEntity entity, String password, Auditable auditable);
-
-    void updateAuditable(@MappingTarget AccountEntity entity, LocalDateTime updatedAt, String updatedBy);
 
     @Mapping(target = "accountId", ignore = true)
     @Mapping(target = "branchId", ignore = true)

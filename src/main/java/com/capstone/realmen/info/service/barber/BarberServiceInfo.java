@@ -11,6 +11,8 @@ public interface BarberServiceInfo {
 
     void setBarberServicePrice(Long barberServicePrice);
 
+    void setThumbnail(String thumbnail);
+
     Long getBarberServiceId();
 
     Long getServiceCategoryId();
@@ -20,4 +22,6 @@ public interface BarberServiceInfo {
     String getBarberServiceName();
 
     Long getBarberServicePrice();
+
+    String getThumbnail();
 }
