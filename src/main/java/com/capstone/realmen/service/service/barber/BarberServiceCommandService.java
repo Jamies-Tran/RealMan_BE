@@ -38,10 +38,13 @@ public class BarberServiceCommandService {
                 .orElseThrow(ResourceNotFoundException::new);
         barberServiceMapper.update(foudBarberService, barberService,
                 Auditable.updateEntity(foudBarberService, requestContext.getAccountId().toString()));
+        displayCommandService.deleteAll(barberServiceId);
+        displayCommandService.saveAll(barberServiceId, barberService.barberServiceDisplays());
         barberServiceRepository.save(foudBarberService);
     }
 
     public void delete(Long barberServiceId) {
+        displayCommandService.deleteAll(barberServiceId);
         barberServiceRepository.deleteById(barberServiceId);
     }
 }

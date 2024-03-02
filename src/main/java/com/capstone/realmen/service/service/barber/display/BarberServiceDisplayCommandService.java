@@ -17,19 +17,27 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class BarberServiceDisplayCommandService {
-    @NonNull
-    private final BarberServiceDisplayRepository barberServiceDisplayRepository;
-    @NonNull
-    private final BarberServiceDisplayMapper dtoMapper;
-    @NonNull
-    private final RequestContext requestContext;
+        @NonNull
+        private final BarberServiceDisplayRepository barberServiceDisplayRepository;
+        @NonNull
+        private final BarberServiceDisplayMapper dtoMapper;
+        @NonNull
+        private final RequestContext requestContext;
 
-    public void saveAll(Long barberServiceId,
-            List<BarberServiceDisplay> displays) {
-        List<BarberServiceDisplayEntity> saveList = displays.stream()
-                .map(display -> dtoMapper.create(display, barberServiceId,
-                        Auditable.of(requestContext.getAccountId().toString())))
-                .toList();
-        barberServiceDisplayRepository.saveAll(saveList);
-    }
+        public void saveAll(Long barberServiceId,
+                        List<BarberServiceDisplay> displays) {
+                List<BarberServiceDisplayEntity> saveList = displays.stream()
+                                .map(display -> dtoMapper.create(display, barberServiceId,
+                                                Auditable.of(requestContext.getAccountId().toString())))
+                                .toList();
+                barberServiceDisplayRepository.saveAll(saveList);
+        }
+
+        public void deleteAll(Long barberServiceId) {
+                barberServiceDisplayRepository.deleteAllByBarberServiceId(barberServiceId);
+        }
+
+        public void deleteAll(List<Long> barberServiceIds) {
+                barberServiceDisplayRepository.deleteAllById(barberServiceIds);
+        }
 }
