@@ -50,4 +50,10 @@ public class BarberServiceQueryService {
         return barberServiceRepository.findAllInfo(searchCriteria.toLowerCase(), pageRequestCustom.pageRequest())
             .stream().map(barberServiceInfoMapper::toDto).toList();
     }
+
+    public List<BarberService> findByComboId(Long comboId) {
+        List<BarberService> barberServices = barberServiceRepository.findAllByComboId(comboId)
+            .stream().map(barberServiceMapper::toDto).toList();
+        return barberServices;
+    }
 }

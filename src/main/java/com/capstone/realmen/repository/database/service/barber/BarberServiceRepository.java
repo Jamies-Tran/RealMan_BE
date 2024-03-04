@@ -58,4 +58,12 @@ public interface BarberServiceRepository extends JpaRepository<BarberServiceEnti
             WHERE :#{#searchCriteria.hasSearchEmpty()} = TRUE OR LOWER(bs.barberServiceName) = :#{#searchCriteria.search()}
                 """)
     List<BarberServiceInfo> findAllInfo(BarberServiceSearchCriteria searchCriteria, Pageable pageable);
+
+    @Query("""
+            SELECT bs
+            FROM BarberServiceEntity bs
+            INNER JOIN ComboServiceEntity cs ON bs.barberServiceId = cs.barberServiceId
+            WHERE cs.comboId = :comboId
+            """)
+    List<BarberServiceEntity> findAllByComboId(Long comboId);
 }
