@@ -45,4 +45,9 @@ public class BarberServiceQueryService {
         List<BarberServiceDisplay> displays = displayQueryService.findAllByBarberServiceId(barberServiceId); 
         return barberServiceInfoMapper.toDto(foundBarberService, displays);
     }
+
+    public List<BarberService> getBarberServiceList(BarberServiceSearchCriteria searchCriteria, PageRequestCustom pageRequestCustom) {
+        return barberServiceRepository.findAllInfo(searchCriteria.toLowerCase(), pageRequestCustom.pageRequest())
+            .stream().map(barberServiceInfoMapper::toDto).toList();
+    }
 }

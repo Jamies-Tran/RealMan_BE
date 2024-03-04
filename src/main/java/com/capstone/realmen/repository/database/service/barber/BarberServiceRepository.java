@@ -48,4 +48,14 @@ public interface BarberServiceRepository extends JpaRepository<BarberServiceEnti
             WHERE bs.barberServiceId = :barberServiceId
                     """)
     Optional<BarberServiceInfo> findInfoById(Long barberServiceId);
+
+    @Query("""
+            SELECT
+                bs.barberServiceId AS barberServiceId,
+                bs.barberServiceName AS barberServiceName,
+                bs.barberServicePrice AS barberServicePrice
+            FROM BarberServiceEntity bs
+            WHERE :#{#searchCriteria.hasSearchEmpty()} = TRUE OR LOWER(bs.barberServiceName) = :#{#searchCriteria.search()}
+                """)
+    List<BarberServiceInfo> findAllInfo(BarberServiceSearchCriteria searchCriteria, Pageable pageable);
 }
