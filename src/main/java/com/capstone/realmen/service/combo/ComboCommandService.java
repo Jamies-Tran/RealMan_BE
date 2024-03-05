@@ -47,4 +47,9 @@ public class ComboCommandService {
         comboServiceCommandService.updateComboService(foundCombo.getComboId(), barberServiceIds);
         comboRepository.save(foundCombo);
     }
+
+    public void delete(Long comboId) {
+        comboServiceCommandService.deleteAllByComboId(comboId);
+        comboRepository.deleteById(comboId);
+    }
 }

@@ -1,6 +1,7 @@
 package com.capstone.realmen.controller.web.combo;
 
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -22,5 +23,9 @@ public interface ComboAPI {
 
     @PutMapping
     @PreAuthorize("hasAnyRole({'ROLE_SHOPOWNER','ROLE_BRANCHMANAGER'})")
-    void update(Long comboId,@RequestBody @Valid ComboUpdateRequest comboRequest);
+    void update(@PathVariable Long comboId, @RequestBody @Valid ComboUpdateRequest comboRequest);
+
+    @DeleteMapping
+    @PreAuthorize("hasAnyRole({'ROLE_SHOPOWNER','ROLE_BRANCHMANAGER'})")
+    void delete(@PathVariable Long comboId);
 }

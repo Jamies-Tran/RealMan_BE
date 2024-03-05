@@ -34,4 +34,9 @@ public class ComboController implements ComboAPI {
     public void update(Long comboId, @Valid ComboUpdateRequest comboRequest) {
         comboUseCaseService.update(comboId, requestMapper.toDto(comboRequest));
     }
+
+    @Override
+    public void delete(Long comboId) {
+        comboUseCaseService.delete(comboId);
+    }
 }

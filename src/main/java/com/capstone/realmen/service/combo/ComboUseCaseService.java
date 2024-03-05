@@ -28,6 +28,11 @@ public class ComboUseCaseService {
         commandService.update(comboId, combo);
     }
 
+    @Transactional
+    public void delete(Long comboId) {
+        commandService.delete(comboId);
+    }
+
     public Combo findById(Long comboId) {
         return queryService.findById(comboId);
     }
