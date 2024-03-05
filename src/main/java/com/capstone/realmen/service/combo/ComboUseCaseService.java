@@ -1,5 +1,7 @@
 package com.capstone.realmen.service.combo;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,5 +41,9 @@ public class ComboUseCaseService {
 
     public Page<Combo> pageAll(ComboSearchCriteria searchCriteria, PageRequestCustom pageRequestCustom) {
         return queryService.pageAll(searchCriteria, pageRequestCustom);
+    }
+
+    public List<Combo> getComboList(ComboSearchCriteria searchCriteria, PageRequestCustom pageRequestCustom) {
+        return queryService.getComboList(searchCriteria, pageRequestCustom);
     }
 }

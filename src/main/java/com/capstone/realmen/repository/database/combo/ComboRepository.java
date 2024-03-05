@@ -1,5 +1,6 @@
 package com.capstone.realmen.repository.database.combo;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -37,4 +38,18 @@ public interface ComboRepository extends JpaRepository<ComboEntity, Long> {
                     LOWER(c.comboName) LIKE %:#{#searchCriteria.search()}%)
             """)
     Page<ComboInfo> pageAllInfo(ComboSearchCriteria searchCriteria, Pageable pageable);
+
+
+    @Query("""
+            SELECT 
+                c.comboId AS comboId,
+                c.comboName AS comboName,
+                c.comboPrice AS comboPrice
+            FROM ComboEntity c
+            WHERE (:#{#searchCriteria.hasSearchEmpty()} = TRUE OR
+                    LOWER(c.comboName) LIKE %:#{#searchCriteria.search()}%)
+                AND (:#{#searchCriteria.hasBranchIdEmpty()} = TRUE OR
+                    c.branchId = :#{#searchCriteria.branchId})
+            """)
+    List<ComboInfo> findAllInfo(ComboSearchCriteria searchCriteria, Pageable pageable);
 }

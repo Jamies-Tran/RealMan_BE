@@ -40,4 +40,10 @@ public class ComboQueryService {
             .map(comboInfoMapper::toDto);
         return combos;
     }
+
+    public List<Combo> getComboList(ComboSearchCriteria searchCriteria, PageRequestCustom pageRequestCustom) {
+        List<Combo> combos = comboRepository.findAllInfo(searchCriteria, pageRequestCustom.pageRequest())
+            .stream().map(comboInfoMapper::toDto).toList();
+        return combos;
+    }
 }
