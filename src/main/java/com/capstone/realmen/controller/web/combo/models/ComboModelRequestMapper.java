@@ -8,5 +8,5 @@ import com.capstone.realmen.util.mappers.RequestModelMapper;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ComboModelRequestMapper extends RequestModelMapper<ComboRequest, Combo> {
-
+    Combo toDto(ComboUpdateRequest model);
 }

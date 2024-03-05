@@ -23,6 +23,11 @@ public class ComboUseCaseService {
         commandService.save(combo);
     }
 
+    @Transactional
+    public void update(Long comboId, Combo combo) {
+        commandService.update(comboId, combo);
+    }
+
     public Combo findById(Long comboId) {
         return queryService.findById(comboId);
     }

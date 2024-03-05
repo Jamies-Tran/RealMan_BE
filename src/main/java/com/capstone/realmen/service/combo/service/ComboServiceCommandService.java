@@ -24,4 +24,19 @@ public class ComboServiceCommandService {
         }).toList();
         comboServiceRepository.saveAll(comboServices);
     }
+
+    public void deleteAllByComboId(Long comboId) {
+        comboServiceRepository.deleteAllByComboId(comboId);
+    }
+
+    public void updateComboService(Long comboId, List<Long> barberServiceIds) {
+        comboServiceRepository.deleteAllByComboId(comboId);
+        List<ComboServiceEntity> comboServices = barberServiceIds.stream().map(barberServiceId -> {
+            return ComboServiceEntity.builder()
+                    .comboId(comboId)
+                    .barberServiceId(barberServiceId)
+                    .build();
+        }).toList();
+        comboServiceRepository.saveAll(comboServices);
+    }
 }
