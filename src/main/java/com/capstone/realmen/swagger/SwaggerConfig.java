@@ -1,7 +1,9 @@
 package com.capstone.realmen.swagger;
 
+import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -31,5 +33,23 @@ public class SwaggerConfig {
         openAPI.addSecurityItem(securityRequirement).components(components).info(info);
         return openAPI;
     }
+
+    // @Bean
+    // public GroupedOpenApi webApi() {
+    // return GroupedOpenApi.builder()
+    // .group("Web")
+    // .pathsToExclude("*/web/**")
+    // .pathsToMatch("*/web/**")
+    // .build();
+    // }
+
+    // @Bean
+    // public GroupedOpenApi mobileApi() {
+    // return GroupedOpenApi.builder()
+    // .group("Mobile")
+    // .pathsToExclude("/mobile/**")
+    // .pathsToMatch("/mobile/**")
+    // .build();
+    // }
 
 }
