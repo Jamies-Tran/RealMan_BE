@@ -7,11 +7,13 @@ import com.capstone.realmen.dto.service.barber.display.BarberServiceDisplay;
 
 @Builder
 public record BarberService(
-        Long barberServiceId,
-        Long serviceCategoryId,
-        String serviceCategoryName,
-        String barberServiceName,
-        String thumbnail,
-        List<BarberServiceDisplay> barberServiceDisplays,
-        Long barberServicePrice) {
+                Long barberServiceId,
+                Long serviceCategoryId,
+                Long branchId,
+                String branchName,
+                String serviceCategoryName,
+                String barberServiceName,
+                String thumbnail,
+                List<BarberServiceDisplay> barberServiceDisplays,
+                Long barberServicePrice) {
 }

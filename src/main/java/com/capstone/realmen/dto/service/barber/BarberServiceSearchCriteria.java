@@ -23,4 +23,8 @@ public record BarberServiceSearchCriteria(String search, Long branchId, Long pri
     public Boolean hasPriceRangeEmpty() {
         return Objects.isNull(priceFrom) || Objects.isNull(priceTo);
     }
+
+    public Boolean hasBranchIdEmpty() {
+        return Objects.isNull(branchId);
+    }
 }

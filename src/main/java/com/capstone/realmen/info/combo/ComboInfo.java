@@ -5,6 +5,8 @@ public interface ComboInfo {
 
     void setBranchId(Long branchId);
 
+    void setBranchName(String branchName);
+
     void setComboName(String comboName);
 
     void setComboPrice(Long comboPrice);
@@ -12,6 +14,8 @@ public interface ComboInfo {
     Long getComboId();
 
     Long getBranchId();
+
+    String getBranchName();
 
     String getComboName();
 

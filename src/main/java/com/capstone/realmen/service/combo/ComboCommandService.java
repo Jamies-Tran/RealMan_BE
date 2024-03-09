@@ -38,18 +38,30 @@ public class ComboCommandService {
                 comboServiceCommandService.saveAll(savedCombo.getComboId(), barberServiceIds);
         }
 
-    public void update(Long comboId, Combo combo) {
-        ComboEntity foundCombo = comboRepository.findById(comboId)
-                .orElseThrow(ResourceNotFoundException::new);
-        comboMapper.update(foundCombo, combo,
-                Auditable.updateEntity(foundCombo, requestContext.getAccountId().toString()));
-        List<Long> barberServiceIds = combo.barberServices().stream().map(BarberService::barberServiceId).toList();        
-        comboServiceCommandService.updateComboService(foundCombo.getComboId(), barberServiceIds);
-        comboRepository.save(foundCombo);
-    }
+        public void update(Long comboId, Combo combo) {
+                ComboEntity foundCombo = comboRepository.findById(comboId)
+                                .orElseThrow(ResourceNotFoundException::new);
+                comboMapper.update(foundCombo, combo,
+                                Auditable.updateEntity(foundCombo, requestContext.getAccountId().toString()));
+                List<Long> barberServiceIds = combo.barberServices().stream().map(BarberService::barberServiceId)
+                                .toList();
+                comboServiceCommandService.updateComboService(foundCombo.getComboId(), barberServiceIds);
+                comboRepository.save(foundCombo);
+        }
 
-    public void delete(Long comboId) {
-        comboServiceCommandService.deleteAllByComboId(comboId);
-        comboRepository.deleteById(comboId);
-    }
+        public void delete(Long comboId) {
+                comboServiceCommandService.deleteAllByComboId(comboId);
+                comboRepository.deleteById(comboId);
+        }
+
+        public void updateBranch(Long branchId, List<Long> comboIds) {
+                List<ComboEntity> combos = comboRepository.findAllById(comboIds);
+                List<ComboEntity> updateCombos = combos.stream().map(c -> {
+                        Auditable auditable = Auditable
+                                        .updateEntity(c, requestContext.getAccountId().toString());
+                        comboMapper.updateBranchId(c, branchId, auditable);
+                        return c;
+                }).toList();
+                comboRepository.saveAll(updateCombos);
+        }
 }

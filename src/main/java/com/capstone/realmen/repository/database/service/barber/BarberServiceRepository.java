@@ -20,17 +20,23 @@ public interface BarberServiceRepository extends JpaRepository<BarberServiceEnti
             SELECT
                 bs.barberServiceId AS barberServiceId,
                 bs.serviceCategoryId AS serviceCategoryId,
+                brs.branchId AS branchId,
+                b.branchName AS branchName,
                 sc.serviceCategoryName AS serviceCategoryName,
                 bs.barberServiceName AS barberServiceName,
                 bs.barberServicePrice AS barberServicePrice,
                 bs.thumbnail AS thumbnail
             FROM BarberServiceEntity bs
             INNER JOIN ServiceCategoryEntity sc ON bs.serviceCategoryId = sc.serviceCategoryId
+            LEFT JOIN BranchServiceEntity brs ON bs.barberServiceId = brs.barberServiceId
+            LEFT JOIN BranchEntity b ON brs.branchId = b.branchId
             WHERE bs.serviceCategoryId = :serviceCategoryId
                 AND (:#{#searchCriteria.hasSearchEmpty()} = TRUE
                     OR LOWER(bs.barberServiceName) LIKE %:#{#searchCriteria.search()}%)
                 AND (:#{#searchCriteria.hasPriceRangeEmpty()} = TRUE
                     OR bs.barberServicePrice BETWEEN :#{#searchCriteria.priceFrom()} AND :#{#searchCriteria.priceTo()})
+                AND (:#{#searchCriteria.hasBranchIdEmpty()} = TRUE
+                    OR brs.branchId = :#{#searchCriteria.branchId()})
             """)
     Page<BarberServiceInfo> pageByServiceCategoryId(Long serviceCategoryId,
             BarberServiceSearchCriteria searchCriteria, Pageable pageable);
@@ -39,12 +45,16 @@ public interface BarberServiceRepository extends JpaRepository<BarberServiceEnti
             SELECT
                 bs.barberServiceId AS barberServiceId,
                 bs.serviceCategoryId AS serviceCategoryId,
+                brs.branchId AS branchId,
+                b.branchName AS branchName,
                 sc.serviceCategoryName AS serviceCategoryName,
                 bs.barberServiceName AS barberServiceName,
                 bs.barberServicePrice AS barberServicePrice,
                 bs.thumbnail AS thumbnail
             FROM BarberServiceEntity bs
             INNER JOIN ServiceCategoryEntity sc ON bs.serviceCategoryId = sc.serviceCategoryId
+            LEFT JOIN BranchServiceEntity brs ON bs.barberServiceId = brs.barberServiceId
+            LEFT JOIN BranchEntity b ON brs.branchId = b.branchId
             WHERE bs.barberServiceId = :barberServiceId
                     """)
     Optional<BarberServiceInfo> findInfoById(Long barberServiceId);

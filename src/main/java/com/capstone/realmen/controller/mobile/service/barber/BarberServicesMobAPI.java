@@ -19,6 +19,7 @@ public interface BarberServicesMobAPI {
     @PreAuthorize("hasAnyRole({'ROLE_CUSTOMER','ROLE_STYLIST','ROLE_MASSEUR'})")
     PageResponse<BarberServiceMobResponse> pageAll(
             @RequestParam(required = false, value = "categoryId", defaultValue = "1") Long serviceCategoryId,
+            @RequestParam(required = false, value = "branchId", defaultValue = "") Long branchId,
             @RequestParam(required = false, value = "search", defaultValue = "") String search,
             @RequestParam(required = false, value = "priceFrom", defaultValue = "") Long priceFrom,
             @RequestParam(required = false, value = "priceTo", defaultValue = "") Long priceTo,

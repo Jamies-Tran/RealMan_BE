@@ -18,25 +18,28 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequiredArgsConstructor
 public class BarberServicesMobController implements BarberServicesMobAPI {
-    @NonNull
-    private final BarberServiceUseCaseService barberServiceUseCaseService;
-    @NonNull
-    private final BarberServiceMobResponseModelMapper resposneMapper;
+        @NonNull
+        private final BarberServiceUseCaseService barberServiceUseCaseService;
+        @NonNull
+        private final BarberServiceMobResponseModelMapper resposneMapper;
 
-    @Override
-    public PageResponse<BarberServiceMobResponse> pageAll(Long serviceCategoryId, String search, Long priceFrom,
-            Long priceTo, String sorter,
-            @Min(1) Integer current, Integer pageSize) {
-        PageRequestCustom pageRequestCustom = PageRequestCustom.of(current, pageSize, SortCustom.of(sorter));
-        BarberServiceSearchCriteria searchCriteria = BarberServiceSearchCriteria.builder()
-                .search(search)
-                .priceFrom(priceFrom)
-                .priceTo(priceTo)
-                .build();
-        Page<BarberServiceMobResponse> resposnes = barberServiceUseCaseService
-                .pageByServiceCategoryId(serviceCategoryId, searchCriteria, pageRequestCustom)
-                .map(resposneMapper::toModel);
-        return new PageResponse<>(resposnes.getContent(), resposnes.getTotalElements(), resposnes.getTotalPages(),
-                pageRequestCustom.current(), pageSize);
-    }
+        @Override
+        public PageResponse<BarberServiceMobResponse> pageAll(Long serviceCategoryId, Long branchId,
+                        String search, Long priceFrom,
+                        Long priceTo, String sorter,
+                        @Min(1) Integer current, Integer pageSize) {
+                PageRequestCustom pageRequestCustom = PageRequestCustom.of(current, pageSize, SortCustom.of(sorter));
+                BarberServiceSearchCriteria searchCriteria = BarberServiceSearchCriteria.builder()
+                                .search(search)
+                                .branchId(branchId)
+                                .priceFrom(priceFrom)
+                                .priceTo(priceTo)
+                                .build();
+                Page<BarberServiceMobResponse> resposnes = barberServiceUseCaseService
+                                .pageByServiceCategoryId(serviceCategoryId, searchCriteria, pageRequestCustom)
+                                .map(resposneMapper::toModel);
+                return new PageResponse<>(resposnes.getContent(), resposnes.getTotalElements(),
+                                resposnes.getTotalPages(),
+                                pageRequestCustom.current(), pageSize);
+        }
 }

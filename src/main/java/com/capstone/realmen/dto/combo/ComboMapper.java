@@ -14,4 +14,7 @@ public interface ComboMapper extends DTOMapper<Combo, ComboEntity>{
     @Mapping(target = "comboId", ignore = true)
     @Mapping(target = "branchId", ignore = true)
     void update(@MappingTarget ComboEntity foundEntity, Combo dto, Auditable auditable);
+
+    @Mapping(target = "branchId", source = "branchId")
+    void updateBranchId(@MappingTarget ComboEntity foundEntity, Long branchId, Auditable auditable);
 }

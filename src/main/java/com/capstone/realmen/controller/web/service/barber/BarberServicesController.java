@@ -33,11 +33,12 @@ public class BarberServicesController implements BarberServicesAPI {
     }
 
     @Override
-    public PageResponse<BarberServiceResponse> pageByServiceCategoryId(Long categoryId, String search, Long priceFrom,
+    public PageResponse<BarberServiceResponse> pageByServiceCategoryId(Long categoryId, Long branchId, String search, Long priceFrom,
             Long priceTo, String sorter, @Min(1) Integer current, Integer pageSize) {
         PageRequestCustom pageRequestCustom = PageRequestCustom.of(current, pageSize, SortCustom.of(sorter));
         BarberServiceSearchCriteria searchCriteria = BarberServiceSearchCriteria.builder()
             .search(search)
+            .branchId(branchId)
             .priceFrom(priceFrom)
             .priceTo(priceTo)
             .build();

@@ -10,6 +10,7 @@ import lombok.Builder;
 public record Combo(
     Long comboId,
     Long branchId,
+    String branchName,
     String comboName,
     Long comboPrice,
     List<BarberService> barberServices

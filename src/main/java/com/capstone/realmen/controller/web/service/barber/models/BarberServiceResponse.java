@@ -9,6 +9,9 @@ import lombok.Builder;
 @Builder
 public record BarberServiceResponse(
                 Long barberServiceId,
+                Long serviceCategoryId,
+                Long branchId,
+                String branchName,
                 String serviceCategoryName,
                 String barberServiceName,
                 String thumbnail,

@@ -26,6 +26,7 @@ public interface BarberServicesAPI {
     @PreAuthorize("hasAnyRole({'ROLE_SHOPOWNER', 'ROLE_BRANCHMANAGER', 'ROLE_RECEPTIONIST'})")
     public PageResponse<BarberServiceResponse> pageByServiceCategoryId(
             @RequestParam(required = true, value = "categoryId", defaultValue = "1") Long categoryId,
+            @RequestParam(required = true, value = "branchId", defaultValue = "") Long branchId,
             @RequestParam(required = false, value = "search", defaultValue = "") String search,
             @RequestParam(required = false, value = "priceFrom", defaultValue = "") Long priceFrom,
             @RequestParam(required = false, value = "priceTo", defaultValue = "") Long priceTo,

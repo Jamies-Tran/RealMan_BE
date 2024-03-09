@@ -7,10 +7,13 @@ import com.capstone.realmen.controller.web.service.barber.models.display.BarberS
 
 @Builder
 public record BarberServiceMobResponse(
-                Long barberServiceId,
-                String serviceCategoryName,
-                String barberServiceName,
-                List<BarberServiceDisplayResponse> barberServiceDisplays,
-                Long barberServicePrice) {
+        Long barberServiceId,
+        Long serviceCategoryId,
+        Long branchId,
+        String branchName,
+        String serviceCategoryName,
+        String barberServiceName,
+        List<BarberServiceDisplayResponse> barberServiceDisplays,
+        Long barberServicePrice) {
 
 }
