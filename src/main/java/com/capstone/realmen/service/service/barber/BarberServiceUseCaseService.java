@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.capstone.realmen.dto.service.barber.BarberService;
 import com.capstone.realmen.dto.service.barber.BarberServiceSearchCriteria;
+import com.capstone.realmen.dto.service.barber.branch.ServiceBranch;
+import com.capstone.realmen.dto.service.barber.branch.ServiceBranchSearchCriteria;
 import com.capstone.realmen.util.request.PageRequestCustom;
 
 import lombok.NonNull;
@@ -47,5 +49,9 @@ public class BarberServiceUseCaseService {
 
     public List<BarberService> getBarberServiceList(BarberServiceSearchCriteria searchCriteria, PageRequestCustom pageRequestCustom) {
         return barberServiceQueryService.getBarberServiceList(searchCriteria, pageRequestCustom);
+    }
+
+    public Page<ServiceBranch> pageServiceBranch(Long barberServiceId, ServiceBranchSearchCriteria searchCriteria, PageRequestCustom pageRequestCustom) {
+        return barberServiceQueryService.pageServiceBranch(barberServiceId, searchCriteria, pageRequestCustom);
     }
 }

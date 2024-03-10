@@ -9,6 +9,10 @@ public interface BarberServiceInfo {
 
     void setBranchName(String branchName);
 
+    void setBranchThumbnail(String branchThumbnail);
+
+    void setBranchServicePrice(Long branchServicePrice);
+
     void setServiceCategoryName(String serviceCategoryName);
 
     void setBarberServiceName(String barberServiceName);
@@ -24,6 +28,10 @@ public interface BarberServiceInfo {
     Long getBranchId();
 
     String getBranchName();
+
+    String getBranchThumbnail();
+
+    Long getBranchServicePrice();
 
     String getServiceCategoryName();
 

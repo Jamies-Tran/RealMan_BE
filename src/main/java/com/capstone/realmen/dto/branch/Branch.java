@@ -3,6 +3,8 @@ package com.capstone.realmen.dto.branch;
 import java.time.LocalTime;
 import java.util.List;
 import com.capstone.realmen.dto.branch.display.BranchDisplay;
+import com.capstone.realmen.dto.branch.service.BranchService;
+
 import lombok.Builder;
 
 @Builder
@@ -20,7 +22,7 @@ public record Branch(
                 LocalTime open,
                 LocalTime close,
                 List<BranchDisplay> branchDisplays,
-                List<Long> barberServiceIds,
+                List<BranchService> branchServices,
                 List<Long> comboIds) {
 
 }

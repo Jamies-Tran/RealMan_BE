@@ -28,4 +28,6 @@ public class BranchServiceEntity {
     Long branchId;
     @Column(name = "barber_service_id")
     Long barberServiceId;
+    @Column(name = "branch_service_price")
+    Long branchServicePrice;
 }

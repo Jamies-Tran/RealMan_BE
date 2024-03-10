@@ -9,6 +9,8 @@ import com.capstone.realmen.controller.error.exceptions.ResourceNotFoundExceptio
 import com.capstone.realmen.dto.service.barber.BarberService;
 import com.capstone.realmen.dto.service.barber.BarberServiceMapper;
 import com.capstone.realmen.dto.service.barber.BarberServiceSearchCriteria;
+import com.capstone.realmen.dto.service.barber.branch.ServiceBranch;
+import com.capstone.realmen.dto.service.barber.branch.ServiceBranchSearchCriteria;
 import com.capstone.realmen.dto.service.barber.display.BarberServiceDisplay;
 import com.capstone.realmen.info.service.barber.BarberServiceInfo;
 import com.capstone.realmen.info.service.barber.BarberServiceInfoMapper;
@@ -55,5 +57,11 @@ public class BarberServiceQueryService {
         List<BarberService> barberServices = barberServiceRepository.findAllByComboId(comboId)
             .stream().map(barberServiceMapper::toDto).toList();
         return barberServices;
+    }
+
+    public Page<ServiceBranch> pageServiceBranch(Long barberServiceId, ServiceBranchSearchCriteria searchCriteria, PageRequestCustom pageRequestCustom) {
+        Page<ServiceBranch> serviceBranches = barberServiceRepository.pageServiceBranch(barberServiceId, searchCriteria.toLowerCase(), pageRequestCustom.pageRequest())
+            .map(barberServiceInfoMapper::convertServiceBranch);
+        return serviceBranches;
     }
 }

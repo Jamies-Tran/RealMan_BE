@@ -13,7 +13,7 @@ public record BranchRequest(
                 @NotNull String branchAddress,
                 @NotNull LocalDateTime open,
                 @NotNull LocalDateTime close,
-                List<Long> barberServiceIds,
+                List<BranchServiceRequest> branchServices,
                 @Size(min = 3) List<BranchDisplayRequest> branchDisplays) {
         public LocalDateTime open() {
                 return open.minusHours(7);

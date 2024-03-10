@@ -59,11 +59,8 @@ public class BranchCommandService {
                                 Auditable.of(requestContext.getAccountId().toString()));
                 BranchEntity savedBranch = branchRepository.save(saveBranch);
                 branchDisplayCommandService.saveAll(savedBranch.getBranchId(), branch.branchDisplays());
-                if (!branch.barberServiceIds().isEmpty() || Objects.nonNull(branch.barberServiceIds())) {
-                        branchServiceCommandService.saveAll(savedBranch.getBranchId(), branch.barberServiceIds());
-                }
-                if (!branch.comboIds().isEmpty() || Objects.nonNull(branch.comboIds())) {
-                        comboCommandService.updateBranch(savedBranch.getBranchId(), branch.comboIds());
+                if (!branch.branchServices().isEmpty() || Objects.nonNull(branch.branchServices())) {
+                        branchServiceCommandService.saveAll(savedBranch.getBranchId(), branch.branchServices());
                 }
         }
 }
