@@ -9,11 +9,11 @@ import lombok.Builder;
 
 @Builder
 public record AccountMobRequest(
-                @DefaultText String firstName,
-                @DefaultText String lastName,
-                @Phone String phone,
-                String thumbnail,
-                LocalDate dob,
-                EGender gender) {
+        @DefaultText String firstName,
+        @DefaultText String lastName,
+        @Phone String phone,
+        String thumbnail,
+        LocalDate dob,
+        EGender gender) {
 
 }

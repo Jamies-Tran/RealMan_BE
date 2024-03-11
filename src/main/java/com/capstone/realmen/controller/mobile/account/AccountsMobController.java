@@ -37,7 +37,7 @@ public class AccountsMobController implements AccountsMobAPI {
 
     @Override
     public void save(@Valid AccountMobRequest accountRequest) {
-        Account account = accountMobRequestModelMapper.toDto(accountRequest);
+        Account account = accountMobRequestModelMapper.toCustomerAccount(accountRequest);
         accountUseCaseService.save(account);
     }
 

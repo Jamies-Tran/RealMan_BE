@@ -8,12 +8,13 @@ import java.time.LocalDate;
 
 @Builder
 public record AccountRequest(
-                @DefaultText String firstName,
-                @DefaultText String lastName,
-                @Phone String phone,
-                String staffCode,
-                ERole role,
-                String thumbnail,
-                LocalDate dob,
-                EGender gender) {
+        @DefaultText String firstName,
+        @DefaultText String lastName,
+        @Phone String phone,
+        Long branchId,
+        String staffCode,
+        ERoleRequest role,
+        String thumbnail,
+        LocalDate dob,
+        EGender gender) {
 }

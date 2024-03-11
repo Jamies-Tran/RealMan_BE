@@ -1,6 +1,6 @@
 package com.capstone.realmen.controller.web.account.models;
 
-public enum ERole {
+public enum ERoleRequest {
     STYLIST,
     MASSEUR,
     BRANCHMANAGER,

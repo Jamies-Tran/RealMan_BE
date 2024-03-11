@@ -11,7 +11,6 @@ import com.capstone.realmen.dto.account.Account;
 import com.capstone.realmen.dto.account.AccountMapper;
 import com.capstone.realmen.dto.auditable.Auditable;
 import com.capstone.realmen.dto.enums.EAccountStatus;
-import com.capstone.realmen.dto.enums.ERole;
 import com.capstone.realmen.repository.database.account.AccountEntity;
 import com.capstone.realmen.repository.database.account.AccountRepository;
 import com.capstone.realmen.repository.redis.AccountCache;
@@ -57,7 +56,7 @@ public class AccountCommandService {
                 .updatePassword(account,
                         appPasswordEncoder.passwordEncoder().encode(appDefaultPassword));
         AccountEntity accountEntity = accountMapper.create(updateAccount,
-                Auditable.ofWeb(requestContext.getAccountId().toString()));
+                Auditable.of(requestContext.getAccountId().toString()));
         accountRepository.save(accountEntity);
     }
 
@@ -66,10 +65,10 @@ public class AccountCommandService {
             throw new ResourceDuplicatedException();
         }
         AccountEntity accountEntity = accountMapper.create(account, Auditable.ofNoIdentifier());
+        // delete when release
         accountMapper.updateBeforeSave(
                 accountEntity,
-                appPasswordEncoder.passwordEncoder().encode(appMobDefaultPassword),
-                ERole.CUSTOMER);
+                appPasswordEncoder.passwordEncoder().encode(appMobDefaultPassword));
         accountRepository.save(accountEntity);
     }
 
@@ -119,7 +118,8 @@ public class AccountCommandService {
         }
         AccountEntity foundAccount = accountRepository.findByPhone(changePasswordRequest.phone())
                 .orElseThrow(ResourceNotFoundException::new);
-        accountMapper.changePassword(foundAccount, appPasswordEncoder.passwordEncoder().encode(changePasswordRequest.newPassword()),
+        accountMapper.changePassword(foundAccount,
+                appPasswordEncoder.passwordEncoder().encode(changePasswordRequest.newPassword()),
                 Auditable.updateEntity(foundAccount, foundAccount.getAccountId().toString()));
         accountRepository.save(foundAccount);
         accountCache.deleteById(changePasswordRequest.phone());
@@ -131,6 +131,10 @@ public class AccountCommandService {
         Auditable auditable = Auditable.updateEntity(foundAccount, requestContext.getAccountId().toString());
         accountMapper.update(foundAccount, account, auditable);
         accountRepository.save(foundAccount);
+    }
+
+    public void updateBranchId(Long accountId, Long branchId) {
+
     }
 
     public void deleteAccount(Long accountId) {

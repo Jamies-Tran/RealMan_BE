@@ -7,7 +7,6 @@ import org.mapstruct.ReportingPolicy;
 
 import com.capstone.realmen.dto.auditable.Auditable;
 import com.capstone.realmen.dto.enums.EAccountStatus;
-import com.capstone.realmen.dto.enums.ERole;
 import com.capstone.realmen.repository.database.account.AccountEntity;
 import com.capstone.realmen.util.mappers.DTOMapper;
 
@@ -16,7 +15,7 @@ public interface AccountMapper extends DTOMapper<Account, AccountEntity> {
     @Mapping(source = "password", target = "password")
     Account updatePassword(Account dto, String password);
 
-    void updateBeforeSave(@MappingTarget AccountEntity entity, String password, ERole role);
+    void updateBeforeSave(@MappingTarget AccountEntity entity, String password);
 
     void changePassword(@MappingTarget AccountEntity entity, String password, Auditable auditable);
 
