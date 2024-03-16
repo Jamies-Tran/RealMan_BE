@@ -3,6 +3,8 @@ package com.capstone.realmen.info.service.barber;
 public interface BarberServiceInfo {
     void setBarberServiceId(Long barberServiceId);
 
+    void setBranchServiceId(Long branchServiceId);
+
     void setServiceCategoryId(Long serviceCategoryId);
 
     void setBranchId(Long branchId);
@@ -19,9 +21,11 @@ public interface BarberServiceInfo {
 
     void setBarberServicePrice(Long barberServicePrice);
 
-    void setThumbnail(String thumbnail);
+    void setBarberServiceThumbnail(String barberServiceThumbnail);
 
     Long getBarberServiceId();
+
+    Long getBranchServiceId();
 
     Long getServiceCategoryId();
 
@@ -39,5 +43,5 @@ public interface BarberServiceInfo {
 
     Long getBarberServicePrice();
 
-    String getThumbnail();
+    String getBarberServiceThumbnail();
 }

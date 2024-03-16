@@ -11,10 +11,10 @@ import lombok.Builder;
 
 @Builder
 public record BarberServiceRequest(
-                Long serviceCategoryId,
-                @NotNull String thumbnail,
-                @DefaultText String barberServiceName,
-                @Size(min = 1) List<BarberServiceDisplayRequest> barberServiceDisplays,
-                @NotNull @Min(15000) Long barberServicePrice) {
+        Long serviceCategoryId,
+        @NotNull String barberServiceThumbnail,
+        @DefaultText String barberServiceName,
+        @Size(min = 1) List<BarberServiceDisplayRequest> barberServiceDisplays,
+        @NotNull @Min(15000) Long barberServicePrice) {
 
 }

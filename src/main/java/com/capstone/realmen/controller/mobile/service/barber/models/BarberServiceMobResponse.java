@@ -9,6 +9,7 @@ import com.capstone.realmen.controller.web.service.barber.models.display.BarberS
 public record BarberServiceMobResponse(
         Long barberServiceId,
         Long serviceCategoryId,
+        String barberServiceThumbnail,
         Long branchId,
         String branchName,
         String serviceCategoryName,

@@ -23,6 +23,7 @@ public record Branch(
                 LocalTime close,
                 List<BranchDisplay> branchDisplays,
                 List<BranchService> branchServices,
+                Double distance,
                 List<Long> comboIds) {
 
 }

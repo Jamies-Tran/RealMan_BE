@@ -1,5 +1,7 @@
 package com.capstone.realmen.dto.branch;
 
+import java.util.Objects;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
@@ -26,4 +28,14 @@ public interface BranchMapper extends DTOMapper<Branch, BranchEntity> {
             Double latitude,
             Double longitude,
             Auditable auditable);
+
+    @Mapping(target = "distance", expression = "java(distance(fromDes, entity))")
+    @Mapping(target = "longitude", source = "entity.longitude")
+    @Mapping(target = "latitude", source = "entity.latitude")
+    Branch toDto(BranchEntity entity, BranchGeo fromDes);
+
+    default Double distance(BranchGeo fromDes, BranchEntity toDes) {
+        return Objects.nonNull(fromDes) ? Math.sqrt(Math.pow((toDes.getLatitude() - fromDes.latitude()), 2.0)
+                + Math.pow((toDes.getLongitude() - fromDes.longitude()), 2.0)) : 0.0;
+    }
 }

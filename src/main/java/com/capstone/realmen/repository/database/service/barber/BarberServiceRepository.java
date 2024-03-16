@@ -26,7 +26,7 @@ public interface BarberServiceRepository extends JpaRepository<BarberServiceEnti
                 sc.serviceCategoryName AS serviceCategoryName,
                 bs.barberServiceName AS barberServiceName,
                 bs.barberServicePrice AS barberServicePrice,
-                bs.thumbnail AS thumbnail
+                bs.barberServiceThumbnail AS barberServiceThumbnail
             FROM BarberServiceEntity bs
             INNER JOIN ServiceCategoryEntity sc ON bs.serviceCategoryId = sc.serviceCategoryId
             LEFT JOIN BranchServiceEntity brs ON bs.barberServiceId = brs.barberServiceId
@@ -51,7 +51,7 @@ public interface BarberServiceRepository extends JpaRepository<BarberServiceEnti
                 sc.serviceCategoryName AS serviceCategoryName,
                 bs.barberServiceName AS barberServiceName,
                 bs.barberServicePrice AS barberServicePrice,
-                bs.thumbnail AS thumbnail
+                bs.barberServiceThumbnail AS barberServiceThumbnail
             FROM BarberServiceEntity bs
             INNER JOIN ServiceCategoryEntity sc ON bs.serviceCategoryId = sc.serviceCategoryId
             LEFT JOIN BranchServiceEntity brs ON bs.barberServiceId = brs.barberServiceId
@@ -80,8 +80,7 @@ public interface BarberServiceRepository extends JpaRepository<BarberServiceEnti
 
     @Query("""
             SELECT
-                bs.barberServiceId AS barberServiceId,
-                b.branchId AS branchId,
+                brs.branchServiceId AS branchServiceId,
                 b.branchName AS branchName,
                 b.branchThumbnail AS branchThumbnail,
                 brs.branchServicePrice AS branchServicePrice
@@ -99,5 +98,6 @@ public interface BarberServiceRepository extends JpaRepository<BarberServiceEnti
                     OR brs.branchServicePrice BETWEEN :#{#searchCriteria.priceFrom()}
                         AND :#{#searchCriteria.priceTo()})
             """)
-    Page<BarberServiceInfo> pageServiceBranch(Long barberServiceId, ServiceBranchSearchCriteria searchCriteria, Pageable pageable);
+    Page<BarberServiceInfo> pageServiceBranch(Long barberServiceId, ServiceBranchSearchCriteria searchCriteria,
+            Pageable pageable);
 }

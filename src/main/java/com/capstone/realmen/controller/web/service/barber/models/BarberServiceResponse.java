@@ -14,7 +14,7 @@ public record BarberServiceResponse(
                 String branchName,
                 String serviceCategoryName,
                 String barberServiceName,
-                String thumbnail,
+                String barberServiceThumbnail,
                 List<BarberServiceDisplayResponse> barberServiceDisplays,
                 Long barberServicePrice) {
 }

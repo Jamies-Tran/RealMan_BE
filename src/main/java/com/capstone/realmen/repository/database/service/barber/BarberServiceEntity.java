@@ -32,6 +32,6 @@ public class BarberServiceEntity extends AuditableEntity {
     String barberServiceName;
     @Column(name = "barber_service_price", nullable = false)
     Long barberServicePrice;
-    @Column(name = "thumbnail", nullable = false)
-    String thumbnail;
+    @Column(name = "barber_service_thumbnail", nullable = false)
+    String barberServiceThumbnail;
 }

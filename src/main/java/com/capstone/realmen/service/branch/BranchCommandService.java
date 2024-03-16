@@ -4,9 +4,12 @@ import java.util.List;
 import java.util.Objects;
 
 import org.springframework.stereotype.Service;
+
+import com.capstone.realmen.controller.error.exceptions.ResourceNotFoundException;
 import com.capstone.realmen.dto.auditable.Auditable;
 import com.capstone.realmen.dto.branch.Branch;
 import com.capstone.realmen.dto.branch.BranchMapper;
+import com.capstone.realmen.dto.branch.service.BranchService;
 import com.capstone.realmen.repository.database.branch.BranchEntity;
 import com.capstone.realmen.repository.database.branch.BranchRepository;
 import com.capstone.realmen.repository.feign.location.geo.ForwardGeocodingService;
@@ -62,5 +65,21 @@ public class BranchCommandService {
                 if (!branch.branchServices().isEmpty() || Objects.nonNull(branch.branchServices())) {
                         branchServiceCommandService.saveAll(savedBranch.getBranchId(), branch.branchServices());
                 }
+        }
+
+        public void addBarberService(Long branchId, List<BranchService> barberServices) {
+                if (branchRepository.existsById(branchId)) {
+                        branchServiceCommandService.saveAll(branchId, barberServices);
+                } else {
+                        throw new ResourceNotFoundException();
+                }
+        }
+
+        public void updateBranchServicePrice(Long branchServiceId, Long branchServicePrice) {
+                branchServiceCommandService.updatePrice(branchServiceId, branchServicePrice);
+        }
+
+        public void deleteBranchService(Long branchServiceId) {
+                branchServiceCommandService.delete(branchServiceId);
         }
 }

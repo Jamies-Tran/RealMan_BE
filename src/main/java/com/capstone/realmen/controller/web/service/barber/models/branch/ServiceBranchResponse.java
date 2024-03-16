@@ -4,11 +4,9 @@ import lombok.Builder;
 
 @Builder
 public record ServiceBranchResponse(
-    Long barberServiceId,
-    Long branchId,
-    String branchName,
-    String branchThumbnail,
-    Long branchServicePrice
-) {
-    
+        Long branchServiceId,
+        String branchName,
+        String branchThumbnail,
+        Long branchServicePrice) {
+
 }

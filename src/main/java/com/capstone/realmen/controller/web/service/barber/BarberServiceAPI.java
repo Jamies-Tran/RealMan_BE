@@ -24,7 +24,7 @@ public interface BarberServiceAPI {
     @PreAuthorize("hasAnyRole({'ROLE_SHOPOWNER','ROLE_BRANCHMANAGER','ROLE_RECEPTIONIST'})")
     ValueResponse<BarberServiceResponse> findById(@PathVariable Long barberServiceId);
 
-    @GetMapping("/service-branch")
+    @GetMapping("/branches")
     PageResponse<ServiceBranchResponse> pageServiceBranch(
             @PathVariable Long barberServiceId,
             @RequestParam(required = false, name = "search", defaultValue = "") String search,
