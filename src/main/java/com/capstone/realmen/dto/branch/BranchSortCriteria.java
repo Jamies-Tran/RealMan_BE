@@ -1,8 +1,10 @@
 package com.capstone.realmen.dto.branch;
 
+import lombok.Builder;
 
-public record BranchGeo(
+@Builder
+public record BranchSortCriteria(
+        String sorter,
         Double latitude,
         Double longitude) {
-
 }

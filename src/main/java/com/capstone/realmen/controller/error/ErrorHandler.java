@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.capstone.realmen.controller.error.exceptions.AccountLoginException;
 import com.capstone.realmen.controller.error.exceptions.JwtInvalidException;
 import com.capstone.realmen.controller.error.exceptions.ResourceDuplicatedException;
+import com.capstone.realmen.controller.error.exceptions.ResourceInvalidException;
 import com.capstone.realmen.controller.error.exceptions.ResourceNotFoundException;
 import com.capstone.realmen.controller.error.exceptions.WrongOTPException;
 import com.capstone.realmen.controller.error.models.ErrorResponse;
@@ -102,6 +103,17 @@ public class ErrorHandler {
                 .errorCode(AppError.WRONG_OTP_CHANGE_PASS.getCode())
                 .errorMsg(AppError.WRONG_OTP_CHANGE_PASS.getMessage())
                 .statusCode(HttpStatus.PRECONDITION_FAILED.value())
+                .issueAt(LocalDateTime.now())
+                .build();
+    }
+
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(ResourceInvalidException.class)
+    public ErrorResponse InvalidSortHandler(ResourceInvalidException exc) {
+        return ErrorResponse.builder()
+                .errorCode(AppError.INVALID_SORT.getCode())
+                .errorMsg(AppError.INVALID_SORT.getMessage())
+                .statusCode(HttpStatus.BAD_REQUEST.value())
                 .issueAt(LocalDateTime.now())
                 .build();
     }

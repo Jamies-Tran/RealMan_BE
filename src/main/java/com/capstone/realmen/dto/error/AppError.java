@@ -14,7 +14,8 @@ public enum AppError {
     INVALID_REQUEST("RM003", "Yêu cầu không hợp lệ"),
     ACCOUNT_INVALID("RM004", "Thông tin tài khoản không hợp lệ"),
     ACCOUNT_DUPLICATED("RM005", "Tài khoản đã tồn tại trên hệ thống"),
-    WRONG_OTP_CHANGE_PASS("RM006", "OTP không đúng");
+    WRONG_OTP_CHANGE_PASS("RM006", "OTP không đúng"),
+    INVALID_SORT("RM007", "Thông tin sắp xếp không hợp lệ");
 
     final String code;
     final String message;
